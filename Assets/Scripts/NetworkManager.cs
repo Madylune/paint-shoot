@@ -40,7 +40,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         }
         else
         {
-            gameInfo.text = "Player(s) online: " + PhotonNetwork.CurrentRoom.PlayerCount;
+            gameInfo.text = "Player(s) online: " + PhotonNetwork.CurrentRoom.PlayerCount + " / MasterClient: " + PhotonNetwork.IsMasterClient;
         }
     }
 
@@ -62,15 +62,19 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
-        //SpawnMyPlayer();
+        SpawnMyPlayer();
     }
 
     void SpawnMyPlayer()
     {
-        GameObject MyPlayer = PhotonNetwork.Instantiate("Prefabs/" + playerPrefab.name, spawnPoint.position, Quaternion.identity, 0) as GameObject;
+        GameObject MyPlayer = PhotonNetwork.Instantiate("Prefabs/" + playerPrefab.name, spawnPoint.position, Quaternion.identity, 0);
+        MyPlayer.AddComponent<Rigidbody>();
+        MyPlayer.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+        MyPlayer.GetComponent<Rigidbody>().collisionDetectionMode = CollisionDetectionMode.Continuous;
+
         if (PhotonNetwork.IsMasterClient)
         {
-            MyPlayer.GetComponent<MeshRenderer>().material.color = Color.blue;
+            MyPlayer.transform.Find("Gun").GetComponent<MeshRenderer>().material.color = Color.blue;
         }
     }
 

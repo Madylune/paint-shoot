@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
@@ -15,14 +16,16 @@ public class CameraFollow : MonoBehaviour
     private void Start()
     {
         player = transform.parent.gameObject;
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        //Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.visible = false;
     }
 
     private void Update()
     {
-        RotateCamera();
-        CheckForShooting();
+        if (player.GetComponent<PhotonView>().IsMine)
+        {
+            RotateCamera();
+        }
     }
 
     private void RotateCamera()
@@ -37,17 +40,5 @@ public class CameraFollow : MonoBehaviour
         currentLookingPosition += smoothVelocity;
 
         //transform.localRotation = Quaternion.AngleAxis(-currentLookingPosition.y, Vector3.right);
-    }
-
-    private void CheckForShooting()
-    {
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            RaycastHit raycastHit;
-            if (Physics.Raycast(transform.position, transform.forward, out raycastHit, Mathf.Infinity))
-            {
-                Debug.Log("shoot: " + raycastHit.collider.name);
-            }
-        }
     }
 }

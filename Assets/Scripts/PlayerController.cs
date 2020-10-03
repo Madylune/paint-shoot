@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         photonView = GetComponent<PhotonView>();
-        rb = GetComponent<Rigidbody>();
+        rb = gameObject.GetComponent<Rigidbody>();
     }
 
     private void FixedUpdate()
