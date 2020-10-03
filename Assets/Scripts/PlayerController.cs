@@ -35,8 +35,11 @@ public class PlayerController : MonoBehaviour
 
     private void Move()
     {
-        transform.Translate(Vector3.forward * Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime);
-        transform.Rotate(Vector3.up * Input.GetAxis("Horizontal") * rotateSpeed * Time.deltaTime);
+        var x = Input.GetAxis("Horizontal") * rotateSpeed * Time.deltaTime;
+        var z = Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime;
+
+        transform.Rotate(0, x, 0);
+        transform.Translate(0, 0, z);
     }
 
     private void Jump()

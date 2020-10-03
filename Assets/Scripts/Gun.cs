@@ -35,15 +35,22 @@ public class Gun : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, range))
             {
-                GameObject bullet = PhotonNetwork.Instantiate("Prefabs/" + bulletPrefab.name, bulletSpawn.position, Quaternion.identity, 0);
-                bullet.GetComponent<Rigidbody>().velocity = cam.transform.TransformDirection(Vector3.forward) * force;
-                Destroy(bullet, 2.0f);
-
+                StartCoroutine(InstantiateBullet());
                 if (hit.collider.tag == "Player")
                 {
                     //Damage
                 }
             }
         }
+    }
+
+    IEnumerator InstantiateBullet()
+    {
+        GameObject bullet = PhotonNetwork.Instantiate("Prefabs/" + bulletPrefab.name, bulletSpawn.position, Quaternion.identity, 0);
+        bullet.GetComponent<Rigidbody>().velocity = cam.transform.TransformDirection(Vector3.forward) * force;
+
+        yield return new WaitForSeconds(2f);
+
+        PhotonNetwork.Destroy(bullet.GetComponent<PhotonView>());
     }
 }
