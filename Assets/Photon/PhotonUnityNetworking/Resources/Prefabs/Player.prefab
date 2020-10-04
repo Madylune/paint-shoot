@@ -462,7 +462,6 @@ MonoBehaviour:
     type: 3}
   crossHair: {fileID: 7910816644820298094}
   bulletSpawn: {fileID: 1366456892980787784}
-  crossHairOffset: {x: 5, y: -25}
 --- !u!1 &5727908269422264196
 GameObject:
   m_ObjectHideFlags: 0

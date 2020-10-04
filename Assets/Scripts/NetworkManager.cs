@@ -21,27 +21,17 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         }
     }
 
-    [SerializeField] private Text gameInfo;
+    [SerializeField] private Text teamInfoText;
 
     [SerializeField] private Transform spawnPoint;
 
     [SerializeField] private GameObject playerPrefab;
 
+    private ExitGames.Client.Photon.Hashtable _playerCustomProps = new ExitGames.Client.Photon.Hashtable();
+
     private void Start()
     {
         StartGame();
-    }
-
-    private void Update()
-    {
-        if (PhotonNetwork.NetworkClientState.ToString() != "Joined")
-        {
-            gameInfo.text = PhotonNetwork.NetworkClientState.ToString();
-        }
-        else
-        {
-            gameInfo.text = "Player(s) online: " + PhotonNetwork.CurrentRoom.PlayerCount + " / MasterClient: " + PhotonNetwork.IsMasterClient;
-        }
     }
 
     public void StartGame()
@@ -56,13 +46,33 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     public override void OnJoinedLobby()
     {
-
         PhotonNetwork.JoinOrCreateRoom("Room", new RoomOptions { MaxPlayers = 2 }, null);
     }
 
     public override void OnJoinedRoom()
     {
         SpawnMyPlayer();
+
+        string teamColor = (string)PhotonNetwork.LocalPlayer.CustomProperties["TeamColor"];
+        teamInfoText.text = teamColor.ToUpper() + " TEAM";
+
+        switch (teamColor)
+        {
+            case "Blue":
+                teamInfoText.color = Color.blue;
+                break;
+            case "Red":
+                teamInfoText.color = Color.red;
+                break;
+            case "Green":
+                teamInfoText.color = Color.green;
+                break;
+            case "Yellow":
+                teamInfoText.color = Color.yellow;
+                break;
+            default:
+                break;
+        }
     }
 
     void SpawnMyPlayer()
@@ -72,13 +82,41 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         MyPlayer.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
         MyPlayer.GetComponent<Rigidbody>().collisionDetectionMode = CollisionDetectionMode.Continuous;
 
-        if (PhotonNetwork.IsMasterClient)
+        int teamIndex = MyPlayer.GetComponent<PhotonView>().OwnerActorNr;
+        JoinTeam(teamIndex);
+    }
+
+    public void JoinTeam(int _team)
+    {
+        string color = string.Empty;
+        switch (_team)
         {
-            MyPlayer.transform.Find("Gun").GetComponent<MeshRenderer>().material.color = Color.blue;
+            case 1:
+                color = "Blue";
+                break;
+            case 2:
+                color = "Red";
+                break;
+            case 3:
+                color = "Green";
+                break;
+            case 4:
+                color = "Yellow";
+                break;
+            default:
+                break;
+        }
+
+        // Already have team
+        if (PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("TeamColor"))
+        {
+            //Switch team
+            PhotonNetwork.LocalPlayer.CustomProperties["TeamColor"] = color;
         }
         else
         {
-            MyPlayer.transform.Find("Gun").GetComponent<MeshRenderer>().material.color = Color.red;
+            _playerCustomProps["TeamColor"] = color;
+            PhotonNetwork.LocalPlayer.CustomProperties = _playerCustomProps;
         }
     }
 
