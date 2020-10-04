@@ -9,7 +9,7 @@ public class Gun : MonoBehaviour
 
     [SerializeField] private Camera cam;
 
-    [SerializeField] private GameObject bulletPrefab;
+    [SerializeField] private GameObject bulletPrefab, crossHair;
 
     [SerializeField] private Transform bulletSpawn;
 
@@ -30,18 +30,36 @@ public class Gun : MonoBehaviour
 
     public void Shoot()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        RaycastHit hit;
+        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, range))
         {
-            RaycastHit hit;
-            if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, range))
+            crossHair.SetActive(true);
+            crossHair.transform.TransformVector(hit.point);
+
+            if (Input.GetKeyDown(KeyCode.Q))
             {
                 StartCoroutine(InstantiateBullet());
-                if (hit.collider.tag == "Player")
-                {
-                    //Damage
-                }
             }
         }
+        else
+        {
+            crossHair.SetActive(false);
+        }
+
+        //if (Input.GetKeyDown(KeyCode.Q))
+        //{
+        //    RaycastHit hit;
+        //    if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, range))
+        //    {
+        //        StartCoroutine(InstantiateBullet());
+        //        crossHair.SetActive(true);
+        //        crossHair.transform.TransformVector(hit.point);
+        //    }
+        //    else
+        //    {
+        //        crossHair.SetActive(false);
+        //    }
+        //}
     }
 
     IEnumerator InstantiateBullet()

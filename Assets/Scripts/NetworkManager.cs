@@ -72,10 +72,10 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         MyPlayer.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
         MyPlayer.GetComponent<Rigidbody>().collisionDetectionMode = CollisionDetectionMode.Continuous;
 
-        if (PhotonNetwork.IsMasterClient)
-        {
-            MyPlayer.transform.Find("Gun").GetComponent<MeshRenderer>().material.color = Color.blue;
-        }
+        //if (PhotonNetwork.IsMasterClient)
+        //{
+        //    MyPlayer.transform.Find("Gun").GetComponent<MeshRenderer>().material.color = Color.blue;
+        //}
     }
 
     public override void OnJoinRoomFailed(short returnCode, string message)
