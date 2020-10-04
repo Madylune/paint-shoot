@@ -76,6 +76,10 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         {
             MyPlayer.transform.Find("Gun").GetComponent<MeshRenderer>().material.color = Color.blue;
         }
+        else
+        {
+            MyPlayer.transform.Find("Gun").GetComponent<MeshRenderer>().material.color = Color.red;
+        }
     }
 
     public override void OnJoinRoomFailed(short returnCode, string message)

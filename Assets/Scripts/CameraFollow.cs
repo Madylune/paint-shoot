@@ -38,7 +38,5 @@ public class CameraFollow : MonoBehaviour
         smoothVelocity.y = Mathf.Lerp(smoothVelocity.y, inputValues.y, 1f / smoothing);
 
         currentLookingPosition += smoothVelocity;
-
-        //transform.localRotation = Quaternion.AngleAxis(-currentLookingPosition.y, Vector3.right);
     }
 }

@@ -38,7 +38,7 @@ public class Gun : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.Q))
             {
-                StartCoroutine(InstantiateBullet());
+                InstantiateBullet();
             }
         }
         else
@@ -47,13 +47,18 @@ public class Gun : MonoBehaviour
         }
     }
 
-    IEnumerator InstantiateBullet()
+    private void InstantiateBullet()
     {
         GameObject bullet = PhotonNetwork.Instantiate("Prefabs/" + bulletPrefab.name, bulletSpawn.position, Quaternion.identity, 0);
         bullet.GetComponent<Rigidbody>().velocity = cam.transform.TransformDirection(Vector3.forward) * force;
 
-        yield return new WaitForSeconds(2f);
-
-        PhotonNetwork.Destroy(bullet.GetComponent<PhotonView>());
+        if (PhotonNetwork.IsMasterClient)
+        {
+            bullet.GetComponent<MeshRenderer>().material.color = Color.blue;
+        }
+        else
+        {
+            bullet.GetComponent<MeshRenderer>().material.color = Color.red;
+        }
     }
 }
