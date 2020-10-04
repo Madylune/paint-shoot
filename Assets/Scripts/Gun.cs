@@ -34,7 +34,6 @@ public class Gun : MonoBehaviour
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, range))
         {
             crossHair.SetActive(true);
-            crossHair.transform.TransformVector(hit.point);
 
             if (Input.GetKeyDown(KeyCode.Q))
             {
