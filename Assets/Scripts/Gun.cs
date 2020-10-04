@@ -45,21 +45,6 @@ public class Gun : MonoBehaviour
         {
             crossHair.SetActive(false);
         }
-
-        //if (Input.GetKeyDown(KeyCode.Q))
-        //{
-        //    RaycastHit hit;
-        //    if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, range))
-        //    {
-        //        StartCoroutine(InstantiateBullet());
-        //        crossHair.SetActive(true);
-        //        crossHair.transform.TransformVector(hit.point);
-        //    }
-        //    else
-        //    {
-        //        crossHair.SetActive(false);
-        //    }
-        //}
     }
 
     IEnumerator InstantiateBullet()

@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &963194228
 Transform:
   m_ObjectHideFlags: 0
@@ -311,6 +311,7 @@ MonoBehaviour:
   rotateSpeed: 150
   jumpForce: 4
   jumpRaycastDistance: 1.1
+  mainCam: {fileID: 963194227}
 --- !u!114 &5514320244560584636
 MonoBehaviour:
   m_ObjectHideFlags: 0

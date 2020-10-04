@@ -8,18 +8,26 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float moveSpeed = 5f, rotateSpeed = 150f, jumpForce = 4f, jumpRaycastDistance = 1.1f;
 
-    private PhotonView photonView;
+    [SerializeField]
+    private Camera mainCam;
+
+    private PhotonView playerView;
     private Rigidbody rb;
 
     private void Start()
     {
-        photonView = GetComponent<PhotonView>();
+        playerView = GetComponent<PhotonView>();
         rb = gameObject.GetComponent<Rigidbody>();
+
+        if (!playerView.IsMine)
+        {
+            mainCam.enabled = false;
+        }
     }
 
     private void FixedUpdate()
     {
-        if (photonView.IsMine)
+        if (playerView.IsMine)
         {
             Move();
         }
@@ -27,7 +35,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (photonView.IsMine)
+        if (playerView.IsMine)
         {
             Jump();
         }
