@@ -1,18 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Photon.Pun;
 using UnityEngine;
 
 public class BulletScript : MonoBehaviour
 {
-    private PhotonView bulletView;
     private MeshRenderer meshRenderer;
 
     [SerializeField] private ParticleSystem[] bulletEffects;
 
     private void Start()
     {
-        bulletView = GetComponent<PhotonView>();
         meshRenderer = GetComponent<MeshRenderer>();
     }
 
@@ -30,10 +27,14 @@ public class BulletScript : MonoBehaviour
                 particle = Instantiate(bulletEffects[1], transform.position, Quaternion.identity).gameObject;
             }
 
-
             Destroy(particle, 2f);
 
-            PhotonNetwork.Destroy(bulletView);
+            Destroy(gameObject);
+
+            if (other.transform.tag == "Player")
+            {
+                other.gameObject.GetComponent<PlayerHealth>().Die();
+            }
         }
     }
 

@@ -39,7 +39,7 @@ public class PlayerList : MonoBehaviourPunCallbacks
 
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
-        int index = playerList.FindIndex(x => x.Player == otherPlayer);
+        int index = playerList.FindIndex(x => x.MyPlayer == otherPlayer);
         if (index != -1)
         {
             Destroy(playerList[index].gameObject);

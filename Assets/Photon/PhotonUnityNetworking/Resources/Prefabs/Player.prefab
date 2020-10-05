@@ -155,6 +155,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -179,6 +180,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &1146644917638696790
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -208,6 +210,7 @@ GameObject:
   - component: {fileID: 5514320244560584636}
   - component: {fileID: 652544317652371954}
   - component: {fileID: 2892351397893793280}
+  - component: {fileID: 1859062458782279850}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -223,7 +226,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1146644918256242932}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.1345387, y: 3, z: 1.5110397}
+  m_LocalPosition: {x: -3.134539, y: 3, z: 1.51104}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1146644917638696793}
@@ -257,6 +260,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -281,6 +285,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!136 &1146644918256242933
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -312,6 +317,11 @@ MonoBehaviour:
   jumpForce: 4
   jumpRaycastDistance: 1.1
   mainCam: {fileID: 963194227}
+  shootRange: 100
+  shootForce: 20
+  bulletPrefab: {fileID: 7905004174352118804, guid: 5d5cd77dd9b3c4889ae9758ccfe3822f,
+    type: 3}
+  crossHair: {fileID: 7910816644820298094}
 --- !u!114 &5514320244560584636
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -363,6 +373,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SmoothingDelay: 5
+--- !u!114 &1859062458782279850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1146644918256242932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7dc3c06c25b024ba69ece5924ac75a4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2489753835234738498
 GameObject:
   m_ObjectHideFlags: 0
@@ -419,6 +441,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -443,6 +466,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &4258629960092186075
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -455,13 +479,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e35f358ec8fbd4fb7a0354698206e6a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 100
-  force: 20
-  cam: {fileID: 963194227}
-  bulletPrefab: {fileID: 7905004174352118804, guid: 5d5cd77dd9b3c4889ae9758ccfe3822f,
-    type: 3}
-  crossHair: {fileID: 7910816644820298094}
-  bulletSpawn: {fileID: 1366456892980787784}
 --- !u!1 &5727908269422264196
 GameObject:
   m_ObjectHideFlags: 0
