@@ -27,6 +27,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     [SerializeField] private GameObject playerPrefab;
 
+    [SerializeField] private GameObject canvas;
+
     private ExitGames.Client.Photon.Hashtable _playerCustomProps = new ExitGames.Client.Photon.Hashtable();
 
     private void Start()
@@ -73,6 +75,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             default:
                 break;
         }
+
+        canvas.SetActive(true);
     }
 
     void SpawnMyPlayer()
