@@ -13,10 +13,12 @@ public class BulletScript : MonoBehaviour
     [SerializeField] private ParticleSystem[] bulletEffects;
 
     public PlayerController MyOwner { get => owner; set => owner = value; }
+    public string bulletColor;
 
     private void Start()
     {
         meshRenderer = GetComponent<MeshRenderer>();
+        bulletColor = MyOwner.GetComponent<PhotonView>().Owner.NickName;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -24,13 +26,22 @@ public class BulletScript : MonoBehaviour
         if (other.transform.tag == "Player" || other.transform.name == "Platform")
         {
             GameObject particle;
+
             if (meshRenderer.material.color == Color.blue)
             {
                 particle = Instantiate(bulletEffects[0], transform.position, Quaternion.identity).gameObject;
             }
-            else
+            else if (meshRenderer.material.color == Color.red)
             {
                 particle = Instantiate(bulletEffects[1], transform.position, Quaternion.identity).gameObject;
+            }
+            else if (meshRenderer.material.color == Color.green)
+            {
+                particle = Instantiate(bulletEffects[2], transform.position, Quaternion.identity).gameObject;
+            }
+            else
+            {
+                particle = Instantiate(bulletEffects[3], transform.position, Quaternion.identity).gameObject;
             }
 
             Destroy(particle, 2f);

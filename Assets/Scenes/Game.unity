@@ -253,7 +253,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoint: {fileID: 1510346371}
-  damageOverlay: {fileID: 0}
 --- !u!4 &371970743
 Transform:
   m_ObjectHideFlags: 0

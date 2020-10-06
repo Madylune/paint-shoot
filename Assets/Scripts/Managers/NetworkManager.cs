@@ -117,11 +117,13 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         {
             //Switch team
             PhotonNetwork.LocalPlayer.CustomProperties["TeamColor"] = color;
+            PhotonNetwork.LocalPlayer.NickName = color;
         }
         else
         {
             _playerCustomProps["TeamColor"] = color;
             PhotonNetwork.LocalPlayer.CustomProperties = _playerCustomProps;
+            PhotonNetwork.LocalPlayer.NickName = color;
         }
     }
 

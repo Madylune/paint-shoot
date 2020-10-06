@@ -108,7 +108,7 @@ public class PlayerController : MonoBehaviour
     {
         GameObject bullet = Instantiate(bulletPrefab, _position, Quaternion.identity).gameObject;
         bullet.GetComponent<Rigidbody>().velocity = mainCam.transform.TransformDirection(Vector3.forward) * shootForce;
-        //bullet.GetComponent<BulletScript>().MyOwner = this;
+        bullet.GetComponent<BulletScript>().MyOwner = this;
 
         switch (teamColor)
         {
