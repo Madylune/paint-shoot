@@ -13,13 +13,13 @@ public class PlayerHealth : MonoBehaviour
 
     public void Die()
     {
-        transform.Rotate(0, 90, 0);
-        Invoke("Respawn", 2f);
+        player.Rotate(90, 0, 0);
+        Invoke("Respawn", 5f);
     }
 
     private void Respawn()
     {
         player.position = GameManager.MyInstance.spawnPoint.position;
-        transform.Rotate(0, 0, 0);
+        player.rotation = Quaternion.identity;
     }
 }
