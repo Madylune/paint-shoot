@@ -1,12 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
+using Photon.Realtime;
 using UnityEngine;
 
 public class BulletScript : MonoBehaviour
 {
     private MeshRenderer meshRenderer;
+    private PlayerController owner;
+    private float points = 10f;
 
     [SerializeField] private ParticleSystem[] bulletEffects;
+
+    public PlayerController MyOwner { get => owner; set => owner = value; }
 
     private void Start()
     {
@@ -34,6 +40,8 @@ public class BulletScript : MonoBehaviour
             if (other.transform.tag == "Player")
             {
                 other.gameObject.GetComponent<PlayerHealth>().Die();
+
+                //MyOwner.MyScore += points;
             }
         }
     }

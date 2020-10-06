@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    private ExitGames.Client.Photon.Hashtable _playerCustomProps = new ExitGames.Client.Photon.Hashtable();
+
     [SerializeField]
     private float moveSpeed = 5f, rotateSpeed = 150f, jumpForce = 4f, jumpRaycastDistance = 1.1f;
 
@@ -19,6 +21,11 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rb;
     private Transform bulletSpawn;
     private string teamColor;
+
+    [SerializeField]
+    private float score;
+
+    public float MyScore { get => score; set => score = value; }
 
     private void Start()
     {
@@ -49,6 +56,8 @@ public class PlayerController : MonoBehaviour
             Jump();
             Shoot();
         }
+
+        UpdateScore(MyScore);
     }
 
     private void Move()
@@ -99,6 +108,7 @@ public class PlayerController : MonoBehaviour
     {
         GameObject bullet = Instantiate(bulletPrefab, _position, Quaternion.identity).gameObject;
         bullet.GetComponent<Rigidbody>().velocity = mainCam.transform.TransformDirection(Vector3.forward) * shootForce;
+        //bullet.GetComponent<BulletScript>().MyOwner = this;
 
         switch (teamColor)
         {
@@ -117,5 +127,11 @@ public class PlayerController : MonoBehaviour
             default:
                 break;
         }
+    }
+
+    public void UpdateScore(float score)
+    {
+        _playerCustomProps["PlayerScore"] = score;
+        PhotonNetwork.SetPlayerCustomProperties(_playerCustomProps);
     }
 }

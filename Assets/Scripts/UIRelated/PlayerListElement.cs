@@ -16,7 +16,11 @@ public class PlayerListElement : MonoBehaviour
 
     private void Update()
     {
-
+        if (MyPlayer.CustomProperties.ContainsKey("PlayerScore"))
+        {
+            float _score = (float)MyPlayer.CustomProperties["PlayerScore"];
+            playerScore.text = _score.ToString() + " pts";
+        }
     }
 
     public void SetPlayerInfo(Player _player)
@@ -44,21 +48,4 @@ public class PlayerListElement : MonoBehaviour
                 break;
         }
     }
-
-    //[PunRPC]
-    //void UpdateScore()
-    //{
-    //    float _score = (float)player.CustomProperties["PlayerScore"];
-    //    playerScore.text = _score.ToString() + " pts";
-    //    MyPlayer. RPC("DestroyEnemy", RpcTarget.AllBuffered, viewID);
-    //}
-
-    //[PunRPC]
-    //void DestroyEnemy(int viewID)
-    //{
-    //    GameObject go = PhotonView.Find(viewID).gameObject;
-    //    Destroy(go);
-    //    PhotonNetwork.Destroy(go);
-    //    _photonView.RPC("DestroyEnemy", RpcTarget.AllBuffered, viewID);
-    //}
 }
