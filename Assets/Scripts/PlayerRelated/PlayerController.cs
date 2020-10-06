@@ -88,7 +88,7 @@ public class PlayerController : MonoBehaviour
     public void Shoot()
     {
         RaycastHit hit;
-        if (Physics.Raycast(mainCam.transform.position, mainCam.transform.forward, out hit, shootRange))
+        if (Physics.Raycast(mainCam.transform.position, mainCam.transform.forward, out hit, shootRange) && !GetComponent<PlayerHealth>().IsDead)
         {
             crossHair.SetActive(true);
 
