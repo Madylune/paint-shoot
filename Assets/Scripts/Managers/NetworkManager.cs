@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using Photon.Pun;
 using Photon.Realtime;
 
@@ -21,15 +20,11 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         }
     }
 
-    [SerializeField] private Text teamInfoText;
-
     [SerializeField] private Transform spawnPoint;
 
     [SerializeField] private GameObject playerPrefab;
 
     [SerializeField] private GameObject canvas, loadingScreen;
-
-    private ExitGames.Client.Photon.Hashtable _playerCustomProps = new ExitGames.Client.Photon.Hashtable();
 
     private void Start()
     {
@@ -55,27 +50,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     {
         SpawnMyPlayer();
 
-        string teamColor = (string)PhotonNetwork.LocalPlayer.CustomProperties["TeamColor"];
-        teamInfoText.text = teamColor.ToUpper() + " TEAM";
-
-        switch (teamColor)
-        {
-            case "Blue":
-                teamInfoText.color = Color.blue;
-                break;
-            case "Red":
-                teamInfoText.color = Color.red;
-                break;
-            case "Green":
-                teamInfoText.color = Color.green;
-                break;
-            case "Yellow":
-                teamInfoText.color = Color.yellow;
-                break;
-            default:
-                break;
-        }
-
         loadingScreen.SetActive(false);
         canvas.SetActive(true);
     }
@@ -86,45 +60,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         MyPlayer.AddComponent<Rigidbody>();
         MyPlayer.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
         MyPlayer.GetComponent<Rigidbody>().collisionDetectionMode = CollisionDetectionMode.Continuous;
-
-        int teamIndex = MyPlayer.GetComponent<PhotonView>().OwnerActorNr;
-        JoinTeam(teamIndex);
-    }
-
-    public void JoinTeam(int _team)
-    {
-        string color = string.Empty;
-        switch (_team)
-        {
-            case 1:
-                color = "Blue";
-                break;
-            case 2:
-                color = "Red";
-                break;
-            case 3:
-                color = "Green";
-                break;
-            case 4:
-                color = "Yellow";
-                break;
-            default:
-                break;
-        }
-
-        // Already have team
-        if (PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("TeamColor"))
-        {
-            //Switch team
-            PhotonNetwork.LocalPlayer.CustomProperties["TeamColor"] = color;
-            PhotonNetwork.LocalPlayer.NickName = color;
-        }
-        else
-        {
-            _playerCustomProps["TeamColor"] = color;
-            PhotonNetwork.LocalPlayer.CustomProperties = _playerCustomProps;
-            PhotonNetwork.LocalPlayer.NickName = color;
-        }
     }
 
     public override void OnJoinRoomFailed(short returnCode, string message)

@@ -7,30 +7,33 @@ using UnityEngine.UI;
 
 public class PlayerListElement : MonoBehaviour
 {
-    [SerializeField] private Text playerScore;
+    [SerializeField] private Text playerScore, playerStatus;
 
     [SerializeField] private Image playerImage;
 
     private Player player;
-    public Player MyPlayer { get => player; set => player = value; }
+    public Player MyPhotonPlayer { get => player; set => player = value; }
 
     private void Update()
     {
-        if (MyPlayer.CustomProperties.ContainsKey("PlayerScore"))
+        if (MyPhotonPlayer.CustomProperties.ContainsKey("PlayerScore"))
         {
-            float _score = (float)MyPlayer.CustomProperties["PlayerScore"];
+            float _score = (float)MyPhotonPlayer.CustomProperties["PlayerScore"];
             playerScore.text = _score.ToString() + " pts";
         }
     }
 
     public void SetPlayerInfo(Player _player)
     {
-        MyPlayer = _player;
+        MyPhotonPlayer = _player;
         playerScore.text = "0 pts";
 
-        string teamColor = (string)_player.CustomProperties["TeamColor"];
+        if (PhotonNetwork.LocalPlayer == _player)
+        {
+            playerStatus.text = "(me)";
+        }
 
-        switch (teamColor)
+        switch (_player.NickName)
         {
             case "Blue":
                 playerImage.color = Color.blue;

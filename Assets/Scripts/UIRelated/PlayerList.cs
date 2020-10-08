@@ -4,51 +4,49 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 
-public class PlayerList : MonoBehaviourPunCallbacks
+public class PlayerList : MonoBehaviourPunCallbacks, IInRoomCallbacks
 {
     [SerializeField]
-    private PlayerListElement playerListElement;
+    private GameObject playerListElementPrefab;
 
     private List<PlayerListElement> playerList = new List<PlayerListElement>();
 
-    private void Awake()
-    {
-        GetCurrentRoomPlayers();
-    }
+    public List<PlayerListElement> MyPlayerList { get => playerList; set => playerList = value; }
 
-    private void GetCurrentRoomPlayers()
-    {
-        Dictionary<int, Player> pList = PhotonNetwork.CurrentRoom.Players;
+    public Player MyPhotonPlayer { get; private set; }
 
-        foreach (KeyValuePair<int, Player> p in pList)
+    public void UpdatePlayerList(Player[] photonPlayers)
+    {
+        for (int i = 0; i < photonPlayers.Length; i++)
         {
-            AddPlayerIntoList(p.Value);
+            PlayerJoinedRoom(photonPlayers[i]);
         }
     }
 
-    private void AddPlayerIntoList(Player player)
+    public void PlayerJoinedRoom(Player photonPlayer)
     {
-        PlayerListElement element = Instantiate(playerListElement, transform);
+        if (photonPlayer == null)
+            return;
 
-        if (element != null)
-        {
-            element.SetPlayerInfo(player);
-            playerList.Add(element);
-        }
+        PlayerLeftRoom(photonPlayer);
+
+        GameObject element = Instantiate(playerListElementPrefab);
+        element.transform.SetParent(transform, false);
+
+        PlayerListElement playerListElement = element.GetComponent<PlayerListElement>();
+        playerListElement.SetPlayerInfo(photonPlayer);
+
+        MyPlayerList.Add(playerListElement);
+
     }
 
-    public override void OnPlayerLeftRoom(Player otherPlayer)
+    public void PlayerLeftRoom(Player photonPlayer)
     {
-        int index = playerList.FindIndex(x => x.MyPlayer == otherPlayer);
+        int index = MyPlayerList.FindIndex(x => x.MyPhotonPlayer == photonPlayer);
         if (index != -1)
         {
-            Destroy(playerList[index].gameObject);
-            playerList.RemoveAt(index);
+            Destroy(MyPlayerList[index].gameObject);
+            MyPlayerList.RemoveAt(index);
         }
-    }
-
-    public override void OnPlayerEnteredRoom(Player newPlayer)
-    {
-        AddPlayerIntoList(newPlayer);
     }
 }

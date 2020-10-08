@@ -56,6 +56,10 @@ public class PlayerController : MonoBehaviour
             Jump();
             Shoot();
         }
+        else
+        {
+            return;
+        }
 
         UpdateScore(MyScore);
     }
