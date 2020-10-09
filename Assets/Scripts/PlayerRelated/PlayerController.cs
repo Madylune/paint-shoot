@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
     private float score;
 
     public float MyScore { get => score; set => score = value; }
+    public bool IsInSafeZone { get; private set; }
 
     private void Start()
     {
@@ -92,7 +93,7 @@ public class PlayerController : MonoBehaviour
     public void Shoot()
     {
         RaycastHit hit;
-        if (Physics.Raycast(mainCam.transform.position, mainCam.transform.forward, out hit, shootRange) && !GetComponent<PlayerHealth>().IsDead)
+        if (Physics.Raycast(mainCam.transform.position, mainCam.transform.forward, out hit, shootRange) && !GetComponent<PlayerHealth>().IsDead && !IsInSafeZone)
         {
             crossHair.SetActive(true);
 
@@ -138,5 +139,28 @@ public class PlayerController : MonoBehaviour
     {
         _playerCustomProps["PlayerScore"] = score;
         playerView.Owner.CustomProperties = _playerCustomProps;
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.transform.tag == "SafeZone")
+        {
+            playerView.RPC("RPC_IsInSafeZone", RpcTarget.AllBuffered, true);
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.transform.tag == "SafeZone")
+        {
+            playerView.RPC("RPC_IsInSafeZone", RpcTarget.AllBuffered, false);
+        }
+    }
+
+    [PunRPC]
+    bool RPC_IsInSafeZone(bool status)
+    {
+        IsInSafeZone = status;
+        return status;
     }
 }

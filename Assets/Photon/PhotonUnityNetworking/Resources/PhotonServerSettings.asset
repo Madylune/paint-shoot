@@ -44,6 +44,7 @@ MonoBehaviour:
   - AddPlayerIntoList
   - RPC_UpdateScore
   - RPC_InstantiateBullet
+  - RPC_IsInSafeZone
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
