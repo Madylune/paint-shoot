@@ -69,7 +69,7 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-    private void Respawn()
+    public void Respawn()
     {
         damageOverlay.SetActive(false);
         player.position = GameManager.MyInstance.spawnPoint.position;
