@@ -16,6 +16,11 @@ public class PlayerListElement : MonoBehaviour
 
     private void Update()
     {
+        UpdateScoreText();
+    }
+
+    public void UpdateScoreText()
+    {
         if (MyPhotonPlayer.CustomProperties.ContainsKey("PlayerScore"))
         {
             float _score = (float)MyPhotonPlayer.CustomProperties["PlayerScore"];

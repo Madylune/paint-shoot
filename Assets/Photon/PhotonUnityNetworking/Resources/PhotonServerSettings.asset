@@ -42,6 +42,7 @@ MonoBehaviour:
   - InstantiateBullet
   - SetPlayerInfo
   - AddPlayerIntoList
+  - RPC_UpdateScore
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

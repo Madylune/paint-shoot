@@ -52,7 +52,7 @@ public class BulletScript : MonoBehaviour
             {
                 other.gameObject.GetComponent<PlayerHealth>().Die();
 
-                //MyOwner.MyScore += points;
+                MyOwner.MyScore += points;
             }
         }
     }

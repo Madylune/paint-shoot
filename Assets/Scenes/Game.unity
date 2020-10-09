@@ -714,6 +714,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playersInRoom: 0
   playerList: {fileID: 1076816913}
+  teamInfoText: {fileID: 1648632806}
 --- !u!4 &1034944799
 Transform:
   m_ObjectHideFlags: 0
@@ -1500,7 +1501,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15033235cab494f4787bf99a5ef90bba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  teamInfoText: {fileID: 1648632806}
   spawnPoint: {fileID: 1510346371}
   playerPrefab: {fileID: 1146644918256242932, guid: 335acf6980ce74750a7b77c8c21d9d1b,
     type: 3}

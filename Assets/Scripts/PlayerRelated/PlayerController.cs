@@ -60,8 +60,10 @@ public class PlayerController : MonoBehaviour
         {
             return;
         }
-
-        UpdateScore(MyScore);
+        if (playerView.IsMine)
+        {
+            playerView.RPC("RPC_UpdateScore", RpcTarget.AllBuffered, MyScore);
+        }
     }
 
     private void Move()
@@ -133,9 +135,10 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void UpdateScore(float score)
+    [PunRPC]
+    void RPC_UpdateScore(float score)
     {
         _playerCustomProps["PlayerScore"] = score;
-        PhotonNetwork.SetPlayerCustomProperties(_playerCustomProps);
+        playerView.Owner.CustomProperties = _playerCustomProps;
     }
 }
