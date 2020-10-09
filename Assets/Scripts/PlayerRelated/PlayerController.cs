@@ -55,14 +55,15 @@ public class PlayerController : MonoBehaviour
         {
             Jump();
             Shoot();
+
+            if (MyScore > 0)
+            {
+                playerView.RPC("RPC_UpdateScore", RpcTarget.AllBuffered, MyScore);
+            }
         }
         else
         {
             return;
-        }
-        if (playerView.IsMine)
-        {
-            playerView.RPC("RPC_UpdateScore", RpcTarget.AllBuffered, MyScore);
         }
     }
 
