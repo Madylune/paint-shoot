@@ -408,7 +408,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62a3883e4d4b94124a7372057bc5c33b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minY: -20
+  minY: -30
 --- !u!1 &2489753835234738498
 GameObject:
   m_ObjectHideFlags: 0

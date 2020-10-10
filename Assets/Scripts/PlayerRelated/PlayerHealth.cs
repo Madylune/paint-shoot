@@ -24,21 +24,12 @@ public class PlayerHealth : MonoBehaviour
         playerView = GetComponent<PhotonView>();
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            Die();
-        }
-    }
-
     public void Die()
     {
-        IsDead = true;
-
         if (playerView.IsMine)
         {
             damageOverlay.SetActive(true);
+            playerView.RPC("RPC_IsDead", RpcTarget.AllBuffered, true);
         }
 
         player.Rotate(90, 0, 0);
@@ -75,6 +66,17 @@ public class PlayerHealth : MonoBehaviour
         player.position = GameManager.MyInstance.spawnPoint.position;
         player.rotation = Quaternion.identity;
 
-        IsDead = false;
+        if (playerView.IsMine)
+        {
+            playerView.RPC("RPC_IsDead", RpcTarget.AllBuffered, false);
+        }
+    }
+
+
+    [PunRPC]
+    bool RPC_IsDead(bool status)
+    {
+        IsDead = status;
+        return status;
     }
 }
