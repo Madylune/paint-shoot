@@ -115,6 +115,7 @@ public class PlayerController : MonoBehaviour
         bullet.GetComponent<Rigidbody>().velocity = mainCam.transform.TransformDirection(Vector3.forward) * shootForce;
         bullet.GetComponent<BulletScript>().MyOwner = this;
 
+        // Set bullet's color
         switch (playerView.Owner.NickName)
         {
             case "Blue":

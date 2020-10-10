@@ -6,7 +6,6 @@ using UnityEngine;
 public class Gun : MonoBehaviourPunCallbacks
 {
     private PhotonView playerView;
-    private string teamColor;
     private MeshRenderer meshRenderer;
 
     private void Start()
@@ -14,9 +13,8 @@ public class Gun : MonoBehaviourPunCallbacks
         playerView = transform.parent.gameObject.GetComponent<PhotonView>();
         meshRenderer = GetComponent<MeshRenderer>();
 
-        teamColor = (string)playerView.Owner.CustomProperties["TeamColor"];
-
-        switch (teamColor)
+        //Set gun's color
+        switch (playerView.Owner.NickName)
         {
             case "Blue":
                 meshRenderer.material.color = Color.blue;

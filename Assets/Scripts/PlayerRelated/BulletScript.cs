@@ -30,6 +30,7 @@ public class BulletScript : MonoBehaviour
     {
         if (other.transform.tag == "Player" || other.transform.name == "Platform")
         {
+            //Set splash effects color
             GameObject particle;
 
             if (meshRenderer.material.color == Color.blue)
