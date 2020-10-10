@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Photon.Pun;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -15,7 +16,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private float shootRange = 100f, shootForce = 20f;
 
-    [SerializeField] private GameObject bulletPrefab, crossHair;
+    [SerializeField] private GameObject playerCanvas, bulletPrefab, crossHair, floatingText;
 
     private PhotonView playerView;
     private Rigidbody rb;
@@ -106,6 +107,14 @@ public class PlayerController : MonoBehaviour
         {
             crossHair.SetActive(false);
         }
+
+        if (IsInSafeZone)
+        {
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                CreateFloatingText();
+            }
+        }
     }
 
     [PunRPC]
@@ -162,5 +171,11 @@ public class PlayerController : MonoBehaviour
     {
         IsInSafeZone = status;
         return status;
+    }
+
+    public void CreateFloatingText()
+    {
+        Text tmp = Instantiate(floatingText, playerCanvas.transform).GetComponent<Text>();
+        tmp.text = "Shooting is prohibited in the safe area !";
     }
 }
