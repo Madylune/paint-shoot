@@ -323,7 +323,6 @@ MonoBehaviour:
   playerCanvas: {fileID: 7911143005047016266}
   bulletPrefab: {fileID: 7905004174352118804, guid: 5d5cd77dd9b3c4889ae9758ccfe3822f,
     type: 3}
-  crossHair: {fileID: 7910816644820298094}
   floatingText: {fileID: 8458120218889053693, guid: 22dc0b0b9675b4f76a5c38f5041fee2b,
     type: 3}
   score: 0
@@ -660,7 +659,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1783451679219668, guid: e79c6b4804dec6f4eb0125d2081d435f, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114335161369775038, guid: e79c6b4804dec6f4eb0125d2081d435f,
         type: 3}
@@ -815,12 +814,12 @@ PrefabInstance:
     - target: {fileID: 224795161209764702, guid: e79c6b4804dec6f4eb0125d2081d435f,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 100
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 224795161209764702, guid: e79c6b4804dec6f4eb0125d2081d435f,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 100
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 224795161209764702, guid: e79c6b4804dec6f4eb0125d2081d435f,
         type: 3}
@@ -843,12 +842,6 @@ GameObject:
 --- !u!224 &7985838968480794742 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 224597112092344012, guid: e79c6b4804dec6f4eb0125d2081d435f,
-    type: 3}
-  m_PrefabInstance: {fileID: 7912415359696811706}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &7910816644820298094 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1783451679219668, guid: e79c6b4804dec6f4eb0125d2081d435f,
     type: 3}
   m_PrefabInstance: {fileID: 7912415359696811706}
   m_PrefabAsset: {fileID: 0}

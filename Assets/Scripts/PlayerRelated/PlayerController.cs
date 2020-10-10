@@ -9,14 +9,12 @@ public class PlayerController : MonoBehaviour
     private ExitGames.Client.Photon.Hashtable _playerCustomProps = new ExitGames.Client.Photon.Hashtable();
 
     [SerializeField]
-    private float moveSpeed = 5f, rotateSpeed = 150f, jumpForce = 4f, jumpRaycastDistance = 1.1f;
+    private float moveSpeed = 5f, rotateSpeed = 150f, jumpForce = 4f, jumpRaycastDistance = 1.1f, shootForce = 20f;
 
     [SerializeField]
     private Camera mainCam;
 
-    [SerializeField] private float shootRange = 100f, shootForce = 20f;
-
-    [SerializeField] private GameObject playerCanvas, bulletPrefab, crossHair, floatingText;
+    [SerializeField] private GameObject playerCanvas, bulletPrefab, floatingText;
 
     private PhotonView playerView;
     private Rigidbody rb;
@@ -93,19 +91,12 @@ public class PlayerController : MonoBehaviour
 
     public void Shoot()
     {
-        RaycastHit hit;
-        if (Physics.Raycast(mainCam.transform.position, mainCam.transform.forward, out hit, shootRange) && !GetComponent<PlayerHealth>().IsDead && !IsInSafeZone)
+        if (!GetComponent<PlayerHealth>().IsDead && !IsInSafeZone)
         {
-            crossHair.SetActive(true);
-
             if (Input.GetKeyDown(KeyCode.Q))
             {
                 playerView.RPC("RPC_InstantiateBullet", RpcTarget.All, bulletSpawn.position);
             }
-        }
-        else
-        {
-            crossHair.SetActive(false);
         }
 
         if (IsInSafeZone)

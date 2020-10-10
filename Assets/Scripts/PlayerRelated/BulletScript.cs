@@ -10,6 +10,9 @@ public class BulletScript : MonoBehaviour
     private PlayerController owner;
     private float points = 10f;
 
+    [SerializeField]
+    private float lifeTime;
+
     [SerializeField] private ParticleSystem[] bulletEffects;
 
     public PlayerController MyOwner { get => owner; set => owner = value; }
@@ -19,6 +22,8 @@ public class BulletScript : MonoBehaviour
     {
         meshRenderer = GetComponent<MeshRenderer>();
         bulletColor = MyOwner.GetComponent<PhotonView>().Owner.NickName;
+
+        Destroy(gameObject, lifeTime);
     }
 
     private void OnTriggerEnter(Collider other)
