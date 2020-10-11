@@ -317,9 +317,8 @@ MonoBehaviour:
   rotateSpeed: 150
   jumpForce: 4
   jumpRaycastDistance: 1.1
-  mainCam: {fileID: 963194227}
-  shootRange: 100
   shootForce: 20
+  mainCam: {fileID: 963194227}
   playerCanvas: {fileID: 7911143005047016266}
   bulletPrefab: {fileID: 7905004174352118804, guid: 5d5cd77dd9b3c4889ae9758ccfe3822f,
     type: 3}

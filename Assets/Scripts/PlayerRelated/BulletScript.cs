@@ -26,9 +26,10 @@ public class BulletScript : MonoBehaviour
         Destroy(gameObject, lifeTime);
     }
 
+
     private void OnTriggerEnter(Collider other)
     {
-        if (other.transform.tag == "Player" || other.transform.name == "Platform")
+        if (other.transform.tag == "Player" || other.transform.name == "Platform" || other.transform.tag == "Barrel")
         {
             //Set splash effects color
             GameObject particle;
@@ -62,6 +63,5 @@ public class BulletScript : MonoBehaviour
             }
         }
     }
-
 
 }

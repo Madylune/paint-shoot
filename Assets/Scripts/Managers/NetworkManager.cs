@@ -58,6 +58,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     {
         GameObject MyPlayer = PhotonNetwork.Instantiate("Prefabs/" + playerPrefab.name, spawnPoint.position, Quaternion.identity, 0);
         MyPlayer.AddComponent<Rigidbody>();
+        MyPlayer.GetComponent<Rigidbody>().mass = 20;
         MyPlayer.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
         MyPlayer.GetComponent<Rigidbody>().collisionDetectionMode = CollisionDetectionMode.Continuous;
     }
