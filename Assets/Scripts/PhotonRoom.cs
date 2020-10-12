@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
 {
-    public static PhotonRoom room;
+    public static PhotonRoom MyInstance;
     private PhotonView roomView;
 
     private Player[] photonPlayers;
@@ -23,16 +23,16 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
 
     private void Awake()
     {
-        if (PhotonRoom.room == null)
+        if (PhotonRoom.MyInstance == null)
         {
-            PhotonRoom.room = this;
+            PhotonRoom.MyInstance = this;
         }
         else
         {
-            if (PhotonRoom.room != this)
+            if (PhotonRoom.MyInstance != this)
             {
-                Destroy(PhotonRoom.room.gameObject);
-                PhotonRoom.room = this;
+                Destroy(PhotonRoom.MyInstance.gameObject);
+                PhotonRoom.MyInstance = this;
             }
         }
         DontDestroyOnLoad(this.gameObject);
