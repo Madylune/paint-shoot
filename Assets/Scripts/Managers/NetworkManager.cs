@@ -20,7 +20,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         }
     }
 
-    [SerializeField] private Transform spawnPoint;
+    [SerializeField] private Transform[] spawnPoints;
 
     [SerializeField] private GameObject playerPrefab;
 
@@ -56,7 +56,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     void SpawnMyPlayer()
     {
-        GameObject MyPlayer = PhotonNetwork.Instantiate("Prefabs/" + playerPrefab.name, spawnPoint.position, Quaternion.identity, 0);
+        GameObject MyPlayer = PhotonNetwork.Instantiate("Prefabs/" + playerPrefab.name, spawnPoints[Random.Range(0, spawnPoints.Length)].position, Quaternion.identity, 0);
         MyPlayer.AddComponent<Rigidbody>();
         MyPlayer.GetComponent<Rigidbody>().mass = 20;
         MyPlayer.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;

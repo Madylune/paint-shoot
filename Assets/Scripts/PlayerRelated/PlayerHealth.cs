@@ -63,7 +63,7 @@ public class PlayerHealth : MonoBehaviour
     public void Respawn()
     {
         damageOverlay.SetActive(false);
-        player.position = GameManager.MyInstance.spawnPoint.position;
+        player.position = GameManager.MyInstance.spawnPoints[Random.Range(0, GameManager.MyInstance.spawnPoints.Length)].position;
         player.rotation = Quaternion.identity;
 
         if (playerView.IsMine)

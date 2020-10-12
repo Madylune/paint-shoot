@@ -19,5 +19,5 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public Transform spawnPoint;
+    public Transform[] spawnPoints;
 }
