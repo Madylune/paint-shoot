@@ -24,10 +24,12 @@ public class GameManager : MonoBehaviour
 
     public float blueScore = 0, redScore = 0, greenScore = 0, yellowScore = 0;
 
-    private float maxScore = 100;
+    private float maxScore = 10;
 
     [SerializeField] private GameObject gameOverGO;
     [SerializeField] private Text winnerText;
+    [SerializeField] private PlayerList playerList;
+    [SerializeField] private Text teamInfoText;
 
     private void Update()
     {
@@ -86,8 +88,36 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0f; // Freeze time and game
     }
 
-    public void BackToMainMenu()
+    public void DisplayPlayerTeam(string teamColor)
     {
+        teamInfoText.text = teamColor.ToUpper() + " TEAM";
 
+        switch (teamColor)
+        {
+            case "Blue":
+                teamInfoText.color = Color.blue;
+                break;
+            case "Red":
+                teamInfoText.color = Color.red;
+                break;
+            case "Green":
+                teamInfoText.color = Color.green;
+                break;
+            case "Yellow":
+                teamInfoText.color = Color.yellow;
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void AddPlayerOnPlayerList(Player[] players)
+    {
+        playerList.UpdatePlayerList(players);
+    }
+
+    public void RemovePlayerOnPlayerList(Player player)
+    {
+        playerList.PlayerLeftRoom(player);
     }
 }

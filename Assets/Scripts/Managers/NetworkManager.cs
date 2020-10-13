@@ -45,10 +45,10 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
-        SpawnMyPlayer();
-
         loadingScreen.SetActive(false);
         gameCanvas.SetActive(true);
+
+        SpawnMyPlayer();
     }
 
     void SpawnMyPlayer()
@@ -63,5 +63,12 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public override void OnJoinRoomFailed(short returnCode, string message)
     {
         print("Room Joined Failed: " + returnCode + "Message: " + message);
+    }
+
+    public void BackToMainMenu()
+    {
+        PhotonNetwork.LeaveRoom(true);
+        gameCanvas.SetActive(false);
+        connectScreen.SetActive(true);
     }
 }

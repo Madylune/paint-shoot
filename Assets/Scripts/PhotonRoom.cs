@@ -15,10 +15,6 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
 
     public Player[] MyPhotonPlayers { get => photonPlayers; set => photonPlayers = value; }
 
-    [SerializeField] private PlayerList playerList;
-
-    [SerializeField] private Text teamInfoText;
-
     private ExitGames.Client.Photon.Hashtable _playerCustomProps = new ExitGames.Client.Photon.Hashtable();
 
     private void Awake()
@@ -61,31 +57,15 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
 
         JoinTeam(PhotonNetwork.LocalPlayer);
 
-        string teamColor = PhotonNetwork.LocalPlayer.NickName;
-        teamInfoText.text = teamColor.ToUpper() + " TEAM";
-
-        switch (teamColor)
-        {
-            case "Blue":
-                teamInfoText.color = Color.blue;
-                break;
-            case "Red":
-                teamInfoText.color = Color.red;
-                break;
-            case "Green":
-                teamInfoText.color = Color.green;
-                break;
-            case "Yellow":
-                teamInfoText.color = Color.yellow;
-                break;
-            default:
-                break;
-        }
+        GameManager.MyInstance.DisplayPlayerTeam(PhotonNetwork.LocalPlayer.NickName);
 
         MyPhotonPlayers = PhotonNetwork.PlayerList;
         playersInRoom = MyPhotonPlayers.Length;
 
-        playerList.UpdatePlayerList(MyPhotonPlayers);
+        if (GameManager.MyInstance != null)
+        {
+            GameManager.MyInstance.AddPlayerOnPlayerList(MyPhotonPlayers);
+        }
     }
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
@@ -97,7 +77,10 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
         MyPhotonPlayers = PhotonNetwork.PlayerList;
         playersInRoom++;
 
-        playerList.UpdatePlayerList(MyPhotonPlayers);
+        if (GameManager.MyInstance != null)
+        {
+            GameManager.MyInstance.AddPlayerOnPlayerList(MyPhotonPlayers);
+        }
     }
 
     public override void OnPlayerLeftRoom(Player otherPlayer)
@@ -106,7 +89,10 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
         MyPhotonPlayers = PhotonNetwork.PlayerList;
         playersInRoom--;
 
-        playerList.PlayerLeftRoom(otherPlayer);
+        if (GameManager.MyInstance != null)
+        {
+            GameManager.MyInstance.RemovePlayerOnPlayerList(otherPlayer);
+        }
     }
 
     public void JoinTeam(Player _player)
