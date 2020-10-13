@@ -48,19 +48,25 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (playerView.IsMine)
+        if (Time.timeScale > 0f)
         {
-            Jump();
-            Shoot();
-
-            if (MyScore > 0)
+            if (playerView.IsMine)
             {
-                playerView.RPC("RPC_UpdateScore", RpcTarget.AllBuffered, MyScore);
+                Shoot();
+
+                if (MyScore > 0)
+                {
+                    playerView.RPC("RPC_UpdateScore", RpcTarget.AllBuffered, MyScore);
+                }
+            }
+            else
+            {
+                return;
             }
         }
         else
         {
-            return;
+            playerCanvas.SetActive(false);
         }
     }
 

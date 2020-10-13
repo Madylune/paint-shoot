@@ -26,7 +26,8 @@ public class GameManager : MonoBehaviour
 
     private float maxScore = 100;
 
-    [SerializeField] private GameObject winnerText;
+    [SerializeField] private GameObject gameOverGO;
+    [SerializeField] private Text winnerText;
 
     private void Update()
     {
@@ -37,23 +38,19 @@ public class GameManager : MonoBehaviour
 
         if (blueScore >= maxScore)
         {
-            winnerText.SetActive(true);
-            winnerText.GetComponent<Text>().text = "Blue Team wins !";
+            StartCoroutine(EndGame("Blue"));
         }
         else if (redScore >= maxScore)
         {
-            winnerText.SetActive(true);
-            winnerText.GetComponent<Text>().text = "Red Team wins !";
+            StartCoroutine(EndGame("Red"));
         }
         else if (greenScore >= maxScore)
         {
-            winnerText.SetActive(true);
-            winnerText.GetComponent<Text>().text = "Green Team wins !";
+            StartCoroutine(EndGame("Green"));
         }
         else if (yellowScore >= maxScore)
         {
-            winnerText.SetActive(true);
-            winnerText.GetComponent<Text>().text = "Yellow Team wins !";
+            StartCoroutine(EndGame("Yellow"));
         }
     }
 
@@ -78,5 +75,19 @@ public class GameManager : MonoBehaviour
                 yellowScore = (float)photonPlayer.CustomProperties["PlayerScore"];
             }
         }
+    }
+
+    private IEnumerator EndGame(string teamName)
+    {
+        yield return new WaitForSeconds(2f);
+
+        gameOverGO.SetActive(true);
+        winnerText.GetComponent<Text>().text = teamName + " Team wins !";
+        Time.timeScale = 0f; // Freeze time and game
+    }
+
+    public void BackToMainMenu()
+    {
+
     }
 }
