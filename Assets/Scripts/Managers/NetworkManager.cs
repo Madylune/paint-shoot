@@ -24,15 +24,12 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     [SerializeField] private GameObject playerPrefab;
 
-    [SerializeField] private GameObject canvas, loadingScreen;
-
-    private void Start()
-    {
-        StartGame();
-    }
+    [SerializeField] private GameObject gameCanvas, loadingScreen, connectScreen;
 
     public void StartGame()
     {
+        loadingScreen.SetActive(true);
+        connectScreen.SetActive(false);
         PhotonNetwork.ConnectUsingSettings();
     }
 
@@ -51,7 +48,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         SpawnMyPlayer();
 
         loadingScreen.SetActive(false);
-        canvas.SetActive(true);
+        gameCanvas.SetActive(true);
     }
 
     void SpawnMyPlayer()
