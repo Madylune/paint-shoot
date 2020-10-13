@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
+using UnityEngine.SceneManagement;
 
 public class NetworkManager : MonoBehaviourPunCallbacks
 {
@@ -51,7 +52,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     public void BackToMainMenu()
     {
-        PhotonNetwork.LeaveRoom(true);
-        connectScreen.SetActive(true);
+        PhotonNetwork.LeaveRoom();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
