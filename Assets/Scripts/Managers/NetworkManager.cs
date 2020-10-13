@@ -20,11 +20,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         }
     }
 
-    [SerializeField] private Transform[] spawnPoints;
-
-    [SerializeField] private GameObject playerPrefab;
-
-    [SerializeField] private GameObject gameCanvas, loadingScreen, connectScreen;
+    [SerializeField] private GameObject loadingScreen, connectScreen;
 
     public void StartGame()
     {
@@ -46,18 +42,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         loadingScreen.SetActive(false);
-        gameCanvas.SetActive(true);
-
-        SpawnMyPlayer();
-    }
-
-    void SpawnMyPlayer()
-    {
-        GameObject MyPlayer = PhotonNetwork.Instantiate("Prefabs/" + playerPrefab.name, spawnPoints[Random.Range(0, spawnPoints.Length)].position, Quaternion.identity, 0);
-        MyPlayer.AddComponent<Rigidbody>();
-        MyPlayer.GetComponent<Rigidbody>().mass = 20;
-        MyPlayer.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
-        MyPlayer.GetComponent<Rigidbody>().collisionDetectionMode = CollisionDetectionMode.Continuous;
     }
 
     public override void OnJoinRoomFailed(short returnCode, string message)
@@ -68,7 +52,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public void BackToMainMenu()
     {
         PhotonNetwork.LeaveRoom(true);
-        gameCanvas.SetActive(false);
         connectScreen.SetActive(true);
     }
 }

@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
 {
     public static PhotonRoom MyInstance;
     private PhotonView roomView;
+
+    [SerializeField] private GameObject playerPrefab;
 
     private Player[] photonPlayers;
     public int playersInRoom;
@@ -66,6 +67,8 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
         {
             GameManager.MyInstance.AddPlayerOnPlayerList(MyPhotonPlayers);
         }
+
+        SpawnMyPlayer();
     }
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
@@ -93,6 +96,15 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
         {
             GameManager.MyInstance.RemovePlayerOnPlayerList(otherPlayer);
         }
+    }
+
+    void SpawnMyPlayer()
+    {
+        GameObject MyPlayer = PhotonNetwork.Instantiate("Prefabs/" + playerPrefab.name, GameManager.MyInstance.spawnPoints[Random.Range(0, GameManager.MyInstance.spawnPoints.Length)].position, Quaternion.identity, 0);
+        MyPlayer.AddComponent<Rigidbody>();
+        MyPlayer.GetComponent<Rigidbody>().mass = 20;
+        MyPlayer.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
+        MyPlayer.GetComponent<Rigidbody>().collisionDetectionMode = CollisionDetectionMode.Continuous;
     }
 
     public void JoinTeam(Player _player)
