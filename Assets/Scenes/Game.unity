@@ -345,6 +345,8 @@ MonoBehaviour:
   redScore: 0
   greenScore: 0
   yellowScore: 0
+  playerPrefab: {fileID: 1146644918256242932, guid: 335acf6980ce74750a7b77c8c21d9d1b,
+    type: 3}
   gameOverGO: {fileID: 647375427}
   winnerText: {fileID: 1276476438}
   playerList: {fileID: 1076816913}

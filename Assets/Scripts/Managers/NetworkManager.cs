@@ -63,11 +63,16 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         loadingScreen.SetActive(false);
-        EnterBattleField();
+
+        if (PhotonNetwork.IsMasterClient)
+        {
+            LoadGame();
+        }
     }
 
-    public void EnterBattleField()
+    public void LoadGame()
     {
-        SceneManager.LoadScene("Game");
+        PhotonNetwork.LoadLevel(1);
+        //SceneManager.LoadScene("Game");
     }
 }

@@ -9,7 +9,8 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
     public static PhotonRoom MyInstance;
     private PhotonView roomView;
 
-    private Player[] photonPlayers;
+    [SerializeField] private Player[] photonPlayers;
+
     public int playersInRoom;
 
     public Player[] MyPhotonPlayers { get => photonPlayers; set => photonPlayers = value; }
@@ -50,7 +51,7 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
         roomView = GetComponent<PhotonView>();
     }
 
-    public override void OnJoinedRoom()
+    public override void OnJoinedRoom() //Call on my side
     {
         base.OnJoinedRoom();
 
@@ -66,7 +67,7 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
         }
     }
 
-    public override void OnPlayerEnteredRoom(Player newPlayer)
+    public override void OnPlayerEnteredRoom(Player newPlayer) //Call on other clients side
     {
         base.OnPlayerEnteredRoom(newPlayer);
 
