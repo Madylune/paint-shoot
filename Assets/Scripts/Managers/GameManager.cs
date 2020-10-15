@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     [SerializeField] private Text winnerText;
     [SerializeField] private PlayerList playerList;
     [SerializeField] private Text teamInfoText;
+    [SerializeField] private GameObject optionsMenu;
 
     public Transform[] spawnPoints;
     public float blueScore = 0, redScore = 0, greenScore = 0, yellowScore = 0;
@@ -48,6 +49,8 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     private void Update()
     {
+        HandleInputs();
+
         if (PhotonRoom.MyInstance.MyPhotonPlayers != null)
         {
             UpdatePlayersScores();
@@ -143,5 +146,26 @@ public class GameManager : MonoBehaviourPunCallbacks
     public void RemovePlayerOnPlayerList(Player player)
     {
         playerList.PlayerLeftRoom(player);
+    }
+
+    private void HandleInputs()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (optionsMenu.activeSelf)
+            {
+                optionsMenu.SetActive(false);
+            }
+            else
+            {
+                optionsMenu.SetActive(true);
+            }
+        }
+    }
+
+    public void QuitGame()
+    {
+        PhotonNetwork.Disconnect();
+        PhotonNetwork.LoadLevel(0);
     }
 }

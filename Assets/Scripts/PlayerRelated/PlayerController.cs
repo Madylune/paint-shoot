@@ -99,7 +99,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!GetComponent<PlayerHealth>().IsDead && !IsInSafeZone)
         {
-            if (Input.GetKeyDown(KeyCode.Q))
+            if (Input.GetKeyDown(KeyCode.F))
             {
                 playerView.RPC("RPC_InstantiateBullet", RpcTarget.All, bulletSpawn.position);
             }
@@ -107,7 +107,7 @@ public class PlayerController : MonoBehaviour
 
         if (IsInSafeZone)
         {
-            if (Input.GetKeyDown(KeyCode.Q))
+            if (Input.GetKeyDown(KeyCode.F))
             {
                 CreateFloatingText();
             }
