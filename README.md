@@ -3,4 +3,8 @@ It's a First Person Shooter game developed by [Madylune](https://github.com/Mady
 
 The first version of this game is in solo mode, one person represent its team.
 
+<p align="center">
+  <img src="cover.png" alt="Couverture du jeu" height="400">
+</p>
+
 This game is developed with [Unity](https://unity.com/fr).
