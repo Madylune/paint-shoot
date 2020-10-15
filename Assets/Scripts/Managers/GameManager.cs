@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoBehaviourPunCallbacks
 {
     private static GameManager instance;
 
@@ -20,16 +21,30 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public Transform[] spawnPoints;
+    public bool IsGameEnd { get => isGameEnd; set => isGameEnd = value; }
 
-    public float blueScore = 0, redScore = 0, greenScore = 0, yellowScore = 0;
+    private bool isGameEnd = false;
+    private float maxScore = 100;
 
-    private float maxScore = 10;
-
+    [SerializeField] private GameObject playerPrefab;
     [SerializeField] private GameObject gameOverGO;
     [SerializeField] private Text winnerText;
     [SerializeField] private PlayerList playerList;
     [SerializeField] private Text teamInfoText;
+
+    public Transform[] spawnPoints;
+    public float blueScore = 0, redScore = 0, greenScore = 0, yellowScore = 0;
+
+    private void Start()
+    {
+        InstantiatePlayer();
+
+        if (PhotonNetwork.IsMasterClient)
+        {
+            DisplayPlayerTeam(PhotonNetwork.LocalPlayer.NickName);
+            AddPlayerOnPlayerList(PhotonRoom.MyInstance.MyPhotonPlayers);
+        }
+    }
 
     private void Update()
     {
@@ -54,6 +69,15 @@ public class GameManager : MonoBehaviour
         {
             StartCoroutine(EndGame("Yellow"));
         }
+    }
+
+    void InstantiatePlayer()
+    {
+        GameObject MyPlayer = PhotonNetwork.Instantiate("Prefabs/" + playerPrefab.name, spawnPoints[Random.Range(0, spawnPoints.Length)].position, Quaternion.identity, 0);
+        MyPlayer.AddComponent<Rigidbody>();
+        MyPlayer.GetComponent<Rigidbody>().mass = 20;
+        MyPlayer.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
+        MyPlayer.GetComponent<Rigidbody>().collisionDetectionMode = CollisionDetectionMode.Continuous;
     }
 
     private void UpdatePlayersScores()
@@ -85,7 +109,7 @@ public class GameManager : MonoBehaviour
 
         gameOverGO.SetActive(true);
         winnerText.GetComponent<Text>().text = teamName + " Team wins !";
-        Time.timeScale = 0f; // Freeze time and game
+        IsGameEnd = true;
     }
 
     public void DisplayPlayerTeam(string teamColor)
