@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
-using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class NetworkManager : MonoBehaviourPunCallbacks
 {
@@ -22,15 +22,18 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     }
 
     [SerializeField] private GameObject loadingScreen, connectScreen;
+    [SerializeField] private Button playButton;
 
     public void Start()
     {
         PhotonNetwork.ConnectUsingSettings();
+        playButton.enabled = true;
     }
 
     public override void OnConnectedToMaster() //Master Server
     {
         Debug.Log("Connected to Photon");
+        playButton.enabled = false;
     }
 
     public void OnClickPlayGame()

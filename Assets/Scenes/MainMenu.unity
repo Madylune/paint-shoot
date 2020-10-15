@@ -152,8 +152,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 864da992506204577a22f351845c085e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 1146644918256242932, guid: 335acf6980ce74750a7b77c8c21d9d1b,
-    type: 3}
   playersInRoom: 0
 --- !u!4 &125323235
 Transform:
@@ -358,8 +356,33 @@ PrefabInstance:
       objectReference: {fileID: 763357489}
     - target: {fileID: 1565641731391323636, guid: 6bf9dd112620d45eab95eaccbd77a966,
         type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnClickPlayGame
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1565641731391323636, guid: 6bf9dd112620d45eab95eaccbd77a966,
+        type: 3}
+      propertyPath: m_Colors.m_DisabledColor.a
+      value: 0.78431374
+      objectReference: {fileID: 0}
+    - target: {fileID: 1565641731391323636, guid: 6bf9dd112620d45eab95eaccbd77a966,
+        type: 3}
+      propertyPath: m_Colors.m_DisabledColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1565641731391323636, guid: 6bf9dd112620d45eab95eaccbd77a966,
+        type: 3}
+      propertyPath: m_Colors.m_DisabledColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1565641731391323636, guid: 6bf9dd112620d45eab95eaccbd77a966,
+        type: 3}
+      propertyPath: m_Colors.m_DisabledColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1565641731494321765, guid: 6bf9dd112620d45eab95eaccbd77a966,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0.7058824
       objectReference: {fileID: 0}
     - target: {fileID: 1565641732536573490, guid: 6bf9dd112620d45eab95eaccbd77a966,
         type: 3}
@@ -510,6 +533,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loadingScreen: {fileID: 1516217132}
   connectScreen: {fileID: 680516103}
+  playButton: {fileID: 2100066806}
 --- !u!4 &763357490
 Transform:
   m_ObjectHideFlags: 0
@@ -720,3 +744,15 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2100066806 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1565641731391323636, guid: 6bf9dd112620d45eab95eaccbd77a966,
+    type: 3}
+  m_PrefabInstance: {fileID: 680516102}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
