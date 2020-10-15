@@ -55,7 +55,7 @@ public class BulletScript : MonoBehaviour
 
             Destroy(gameObject);
 
-            if (other.transform.tag == "Player" && !other.gameObject.GetComponent<PlayerController>().IsInSafeZone && !other.gameObject.GetComponent<PlayerHealth>().IsDead)
+            if (other.transform.tag == "Player" && !other.gameObject.GetComponent<PlayerController>().IsInSafeZone && !other.gameObject.GetComponent<PlayerHealth>().IsDead && !GameManager.MyInstance.IsGameEnd)
             {
                 other.gameObject.GetComponent<PlayerHealth>().Die();
 
