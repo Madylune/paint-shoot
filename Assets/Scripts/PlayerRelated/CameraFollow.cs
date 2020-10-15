@@ -16,8 +16,6 @@ public class CameraFollow : MonoBehaviour
     private void Start()
     {
         player = transform.parent.gameObject;
-        //Cursor.lockState = CursorLockMode.Locked;
-        //Cursor.visible = false;
     }
 
     private void Update()

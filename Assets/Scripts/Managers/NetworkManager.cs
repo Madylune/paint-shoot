@@ -73,6 +73,5 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public void LoadGame()
     {
         PhotonNetwork.LoadLevel(1);
-        //SceneManager.LoadScene("Game");
     }
 }

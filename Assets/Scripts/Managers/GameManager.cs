@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviourPunCallbacks
@@ -24,7 +25,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     public bool IsGameEnd { get => isGameEnd; set => isGameEnd = value; }
 
     private bool isGameEnd = false;
-    private float maxScore = 100;
+    private float maxScore = 30;
 
     [SerializeField] private GameObject playerPrefab;
     [SerializeField] private GameObject gameOverGO;
@@ -161,11 +162,16 @@ public class GameManager : MonoBehaviourPunCallbacks
                 optionsMenu.SetActive(true);
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            gameOverGO.SetActive(true);
+        }
     }
 
     public void QuitGame()
     {
         PhotonNetwork.Disconnect();
-        PhotonNetwork.LoadLevel(0);
+        SceneManager.LoadSceneAsync("MainMenu", LoadSceneMode.Single);
     }
 }
