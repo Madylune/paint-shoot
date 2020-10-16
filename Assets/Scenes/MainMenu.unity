@@ -494,6 +494,11 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8240624353810004170, guid: 6bf9dd112620d45eab95eaccbd77a966,
+        type: 3}
+      propertyPath: m_FontData.m_FontStyle
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6bf9dd112620d45eab95eaccbd77a966, type: 3}
 --- !u!1 &680516103 stripped
@@ -669,6 +674,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3264476631819262162, guid: fe111aa4afb5b486cb6b9f66fc86aa77,
+        type: 3}
+      propertyPath: m_Text
+      value: Waiting for other players ...
+      objectReference: {fileID: 0}
+    - target: {fileID: 3264476631819262165, guid: fe111aa4afb5b486cb6b9f66fc86aa77,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.000015259
+      objectReference: {fileID: 0}
+    - target: {fileID: 3264476631819262165, guid: fe111aa4afb5b486cb6b9f66fc86aa77,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 849.68536
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fe111aa4afb5b486cb6b9f66fc86aa77, type: 3}

@@ -27,13 +27,13 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public void Start()
     {
         PhotonNetwork.ConnectUsingSettings();
-        playButton.enabled = true;
+        playButton.interactable = false;
     }
 
     public override void OnConnectedToMaster() //Master Server
     {
         Debug.Log("Connected to Photon");
-        playButton.enabled = false;
+        playButton.interactable = true;
     }
 
     public void OnClickPlayGame()
