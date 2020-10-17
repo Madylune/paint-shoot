@@ -41,11 +41,8 @@ public class GameManager : MonoBehaviourPunCallbacks
     {
         InstantiatePlayer();
 
-        if (PhotonNetwork.IsMasterClient)
-        {
-            DisplayPlayerTeam(PhotonNetwork.LocalPlayer.NickName);
-            AddPlayerOnPlayerList(PhotonRoom.MyInstance.MyPhotonPlayers);
-        }
+        DisplayPlayerTeam(PhotonNetwork.LocalPlayer.NickName);
+        AddPlayerOnPlayerList(PhotonRoom.MyInstance.MyPhotonPlayers);
     }
 
     private void Update()
@@ -171,6 +168,7 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     public void QuitGame()
     {
+        PhotonNetwork.LeaveRoom();
         PhotonNetwork.Disconnect();
         SceneManager.LoadSceneAsync("MainMenu", LoadSceneMode.Single);
     }

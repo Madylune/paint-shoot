@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
     private Transform bulletSpawn;
 
     [SerializeField]
-    private float score;
+    private float score = 0;
 
     public float MyScore { get => score; set => score = value; }
     public bool IsInSafeZone { get; private set; }
@@ -54,10 +54,7 @@ public class PlayerController : MonoBehaviour
             {
                 Shoot();
 
-                if (MyScore > 0)
-                {
-                    playerView.RPC("RPC_UpdateScore", RpcTarget.AllBuffered, MyScore);
-                }
+                playerView.RPC("RPC_UpdateScore", RpcTarget.AllBuffered, MyScore);
             }
             else
             {

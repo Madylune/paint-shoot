@@ -357,7 +357,7 @@ PrefabInstance:
     - target: {fileID: 1565641731391323636, guid: 6bf9dd112620d45eab95eaccbd77a966,
         type: 3}
       propertyPath: m_Interactable
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1565641731391323636, guid: 6bf9dd112620d45eab95eaccbd77a966,
         type: 3}
@@ -378,6 +378,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Colors.m_DisabledColor.b
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1565641731391323636, guid: 6bf9dd112620d45eab95eaccbd77a966,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SearchPlayers
       objectReference: {fileID: 0}
     - target: {fileID: 1565641731494321765, guid: 6bf9dd112620d45eab95eaccbd77a966,
         type: 3}
@@ -678,7 +683,7 @@ PrefabInstance:
     - target: {fileID: 3264476631819262162, guid: fe111aa4afb5b486cb6b9f66fc86aa77,
         type: 3}
       propertyPath: m_Text
-      value: Waiting for other players ...
+      value: Searching players ...
       objectReference: {fileID: 0}
     - target: {fileID: 3264476631819262165, guid: fe111aa4afb5b486cb6b9f66fc86aa77,
         type: 3}
@@ -764,6 +769,27 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2058821541 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3264476631819262164, guid: fe111aa4afb5b486cb6b9f66fc86aa77,
+    type: 3}
+  m_PrefabInstance: {fileID: 1516217131}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2058821545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2058821541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!114 &2100066806 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1565641731391323636, guid: 6bf9dd112620d45eab95eaccbd77a966,

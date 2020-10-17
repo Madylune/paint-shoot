@@ -31,7 +31,6 @@ public class PlayerListElement : MonoBehaviour
     public void SetPlayerInfo(Player _player)
     {
         MyPhotonPlayer = _player;
-        playerScore.text = "0 pts";
 
         if (PhotonNetwork.LocalPlayer == _player)
         {

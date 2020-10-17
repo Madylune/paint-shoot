@@ -53,8 +53,6 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
 
     public override void OnJoinedRoom() //Call on my side
     {
-        base.OnJoinedRoom();
-
         JoinTeam(PhotonNetwork.LocalPlayer);
 
         MyPhotonPlayers = PhotonNetwork.PlayerList;
@@ -69,8 +67,6 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
 
     public override void OnPlayerEnteredRoom(Player newPlayer) //Call on other clients side
     {
-        base.OnPlayerEnteredRoom(newPlayer);
-
         JoinTeam(newPlayer);
 
         MyPhotonPlayers = PhotonNetwork.PlayerList;
@@ -82,7 +78,12 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
         }
     }
 
-    public override void OnPlayerLeftRoom(Player otherPlayer)
+    public override void OnLeftRoom() //Call on my side
+    {
+        PhotonNetwork.LoadLevel(0);
+    }
+
+    public override void OnPlayerLeftRoom(Player otherPlayer) //Call on other clients side
     {
         base.OnPlayerLeftRoom(otherPlayer);
         MyPhotonPlayers = PhotonNetwork.PlayerList;
@@ -120,7 +121,7 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
         {
             //Switch team
             _player.CustomProperties["TeamColor"] = color;
-            PhotonNetwork.LocalPlayer.NickName = color;
+            _player.NickName = color;
         }
         else
         {

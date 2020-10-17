@@ -22,32 +22,59 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     }
 
     [SerializeField] private GameObject loadingScreen, connectScreen;
+
     [SerializeField] private Button playButton;
+
+    private bool isConnecting = false;
+
+    private const string GameVersion = "0.1";
+
+    private const int MaxPlayersPerRoom = 2;
 
     public void Start()
     {
-        PhotonNetwork.ConnectUsingSettings();
-        playButton.interactable = false;
+        PhotonNetwork.AutomaticallySyncScene = true;
     }
 
     public override void OnConnectedToMaster() //Master Server
     {
-        Debug.Log("Connected to Photon");
-        playButton.interactable = true;
+        if (isConnecting)
+        {
+            Debug.Log("Debug: Connected to Master");
+            JoinRoom();
+        }
     }
 
-    public void OnClickPlayGame()
+    public void SearchPlayers()
     {
-        JoinRoom();
+        isConnecting = true;
+
+        loadingScreen.SetActive(true);
+        connectScreen.SetActive(false);
+
+        if (PhotonNetwork.IsConnected)
+        {
+            JoinRoom();
+        }
+        else
+        {
+            PhotonNetwork.GameVersion = GameVersion;
+            PhotonNetwork.ConnectUsingSettings();
+        }
     }
 
     public void JoinRoom()
     {
-        loadingScreen.SetActive(true);
-        connectScreen.SetActive(false);
-
-        PhotonNetwork.AutomaticallySyncScene = true;
+        Debug.Log("Debug: Try to join room...");
         PhotonNetwork.JoinRandomRoom();
+    }
+
+    public override void OnDisconnected(DisconnectCause cause)
+    {
+        loadingScreen.SetActive(false);
+        connectScreen.SetActive(true);
+
+        Debug.Log($"Debug Disconnected due to: {cause}");
     }
 
     public override void OnJoinRandomFailed(short returnCode, string message)
@@ -59,22 +86,24 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     public void CreateRoom()
     {
-        RoomOptions roomOptions = new RoomOptions { MaxPlayers = 4 };
+        Debug.Log("Debug: Create a new room");
+        RoomOptions roomOptions = new RoomOptions { MaxPlayers = MaxPlayersPerRoom };
         PhotonNetwork.CreateRoom(null, roomOptions);
     }
 
-    public override void OnJoinedRoom()
+    public override void OnPlayerEnteredRoom(Player newPlayer)
     {
-        loadingScreen.SetActive(false);
-
-        if (PhotonNetwork.IsMasterClient)
+        if (PhotonNetwork.CurrentRoom.PlayerCount == MaxPlayersPerRoom)
         {
+            Debug.Log("Debug: All players are connected");
+            PhotonNetwork.CurrentRoom.IsOpen = false;
             LoadGame();
         }
     }
 
     public void LoadGame()
     {
+        Debug.Log("Debug: Load game");
         PhotonNetwork.LoadLevel(1);
     }
 }
