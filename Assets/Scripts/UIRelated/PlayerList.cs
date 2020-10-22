@@ -17,9 +17,12 @@ public class PlayerList : MonoBehaviourPunCallbacks, IInRoomCallbacks
 
     public void UpdatePlayerList(Player[] photonPlayers)
     {
-        for (int i = 0; i < photonPlayers.Length; i++)
+        if (photonPlayers != null)
         {
-            PlayerJoinedRoom(photonPlayers[i]);
+            for (int i = 0; i < photonPlayers.Length; i++)
+            {
+                PlayerJoinedRoom(photonPlayers[i]);
+            }
         }
     }
 

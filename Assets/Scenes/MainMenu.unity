@@ -504,6 +504,15 @@ PrefabInstance:
       propertyPath: m_FontData.m_FontStyle
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8240624353810004170, guid: 6bf9dd112620d45eab95eaccbd77a966,
+        type: 3}
+      propertyPath: m_Text
+      value: 'HOLD DIRECTIONAL ARROWS TO MOVE YOUR CHARACTER
+
+
+        PRESS [ SPACE
+        ] TO SHOOT OTHER TEAMS'
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6bf9dd112620d45eab95eaccbd77a966, type: 3}
 --- !u!1 &680516103 stripped

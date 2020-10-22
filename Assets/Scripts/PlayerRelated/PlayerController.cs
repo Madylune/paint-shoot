@@ -76,27 +76,11 @@ public class PlayerController : MonoBehaviour
         transform.Translate(0, 0, z);
     }
 
-    private void Jump()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if (IsGrounded())
-            {
-                rb.AddForce(0, jumpForce, 0, ForceMode.Impulse);
-            }
-        }
-    }
-
-    private bool IsGrounded()
-    {
-        return Physics.Raycast(transform.position, Vector3.down, jumpRaycastDistance);
-    }
-
     public void Shoot()
     {
         if (!GetComponent<PlayerHealth>().IsDead && !IsInSafeZone)
         {
-            if (Input.GetKeyDown(KeyCode.F))
+            if (Input.GetKeyDown(KeyCode.Space))
             {
                 playerView.RPC("RPC_InstantiateBullet", RpcTarget.All, bulletSpawn.position);
             }
@@ -104,7 +88,7 @@ public class PlayerController : MonoBehaviour
 
         if (IsInSafeZone)
         {
-            if (Input.GetKeyDown(KeyCode.F))
+            if (Input.GetKeyDown(KeyCode.Space))
             {
                 CreateFloatingText();
             }

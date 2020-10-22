@@ -40,7 +40,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     {
         if (isConnecting)
         {
-            Debug.Log("Debug: Connected to Master");
+            //Debug.Log("Debug: Connected to Master");
             JoinRoom();
         }
     }
@@ -65,7 +65,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     public void JoinRoom()
     {
-        Debug.Log("Debug: Try to join room...");
+        //Debug.Log("Debug: Try to join room...");
         PhotonNetwork.JoinRandomRoom();
     }
 
@@ -86,7 +86,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     public void CreateRoom()
     {
-        Debug.Log("Debug: Create a new room");
+        //Debug.Log("Debug: Create a new room");
         RoomOptions roomOptions = new RoomOptions { MaxPlayers = MaxPlayersPerRoom };
         PhotonNetwork.CreateRoom(null, roomOptions);
     }
@@ -95,7 +95,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     {
         if (PhotonNetwork.CurrentRoom.PlayerCount == MaxPlayersPerRoom)
         {
-            Debug.Log("Debug: All players are connected");
+            //Debug.Log("Debug: All players are connected");
             PhotonNetwork.CurrentRoom.IsOpen = false;
             LoadGame();
         }
@@ -103,7 +103,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     public void LoadGame()
     {
-        Debug.Log("Debug: Load game");
+        //Debug.Log("Debug: Load game");
         PhotonNetwork.LoadLevel(1);
     }
 }
